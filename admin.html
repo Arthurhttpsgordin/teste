@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Administração - Adicionar Notícias ou Divulgações</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    /* Estilos para a seção de Divulgações */
+#divulgacoes {
+  margin-top: 20px;
+}
+
+.divulgacao {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.divulgacao img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.divulgacao h2 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.divulgacao p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.divulgacao .btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.divulgacao .btn:hover {
+  background-color: #0056b3;
+}
+
+.divulgacao form {
+  margin-bottom: 20px;
+}
+
+.divulgacao form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.divulgacao form input[type="text"],
+.divulgacao form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.divulgacao form input[type="file"] {
+  margin-top: 8px;
+}
+
+.divulgacao form button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.divulgacao form button:hover {
+  background-color: #45a049;
+}
+
+.divulgacao .buttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.divulgacao .buttons button {
+  margin-right: 10px;
+}
+
+.divulgacao .notification {
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+  border-radius: 4px;
+}
+
+.divulgacao .notification p {
+  margin: 0;
+}
+
+.divulgacao .notification.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border-color: #d6e9c6;
+}
+
+.divulgacao .notification.success p {
+  margin: 0;
+}
+
+.divulgacao .notification.close {
+  float: right;
+  cursor: pointer;
+}
+
+.divulgacao .notification.close:hover {
+  color: #000;
+}
+
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+  
+    .noticia {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+  
+    .noticia img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  
+    .noticia h2 {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+    .noticia p {
+      color: #666;
+    }
+  
+    .btn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+      margin-right: 10px;
+    }
+  
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  
+    form {
+      margin-bottom: 20px;
+    }
+  
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+  
+    form input[type="text"],
+    form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+  
+    form input[type="file"] {
+      margin-top: 8px;
+    }
+  
+    form button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  
+    form button:hover {
+      background-color: #45a049;
+    }
+  
+    .buttons {
+      text-align: center;
+    }
+  
+    .buttons button {
+      margin-right: 10px;
+    }
+  
+    .notification {
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f2dede;
+      color: #a94442;
+      border: 1px solid #ebccd1;
+      border-radius: 4px;
+    }
+  
+    .notification p {
+      margin: 0;
+    }
+  
+    .notification.success {
+      background-color: #dff0d8;
+      color: #3c763d;
+      border-color: #d6e9c6;
+    }
+  
+    .notification.success p {
+      margin: 0;
+    }
+  
+    .notification.close {
+      float: right;
+      cursor: pointer;
+    }
+  
+    .notification.close:hover {
+      color: #000;
+    }
+  
+    /* Estilos para o painel de administração */
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+  
+  </style>
+  
+</head>
+<body>
+  <h1>Painel de Administração - Adicionar Notícias ou Divulgações</h1>
+
+
+  <table>
+    <tr>
+      <td>
+        <button class="btn btn-adicionar" id="btn-adicionar-noticia">Adicionar Notícia</button>
+      </td>
+      <td>
+        <button class="btn btn-adicionar" id="btn-adicionar-divulgacao">Adicionar Divulgação</button>
+      </td>
+    </tr>
+  </table>
+  
+  
+  <form id="form-noticia" style="display: none;">
+    <h2 id="form-title-noticia">Adicionar Nova Notícia</h2>
+    <input type="hidden" id="noticiaId">
+    <input type="text" id="tituloNoticia" placeholder="Título" required>
+    <textarea id="descricaoNoticia" placeholder="Descrição" rows="4" required></textarea>
+    <input type="text" id="imagemNoticia" placeholder="URL da Imagem" required>
+    <input type="text" id="dataNoticia" placeholder="Data de Publicação" class="flatpickr" required>
+    <button type="submit" class="btn">Adicionar Notícia</button>
+    <button type="button" id="btn-cancelar-noticia" class="btn">Cancelar</button>
+  </form>
+
+
+  <div id="noticias-list"></div>
+
+  <!-- Formulário para adicionar/editar divulgações -->
+  <form id="form-divulgacao" style="display: none;">
+    <h2 id="form-title-divulgacao">Adicionar Nova Divulgação</h2>
+    <input type="hidden" id="divulgacaoId">
+    <input type="text" id="tituloDivulgacao" placeholder="Título" required>
+    <textarea id="descricaoDivulgacao" placeholder="Descrição" rows="4" required></textarea>
+    <input type="text" id="imagemDivulgacao" placeholder="URL da Imagem" required>
+    <input type="text" id="dataDivulgacao" placeholder="Data de Publicação" class="flatpickr" required>
+    <button type="submit" class="btn">Adicionar Divulgação</button>
+    <button type="button" id="btn-cancelar-divulgacao" class="btn">Cancelar</button>
+  </form>
+
+  <!-- Lista de divulgações -->
+  <div id="divulgacoes-list"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    $(document).ready(function() {
+     
+      $(".flatpickr").flatpickr({
+        dateFormat: "Y-m-d", // Formato da data
+        enableTime: false, // Desabilitar seleção de hora
+      });
+
+      // Mostrar formulário de notícia ao clicar no botão
+      $('#btn-adicionar-noticia').click(function() {
+        $('#form-noticia').show();
+        $('#form-divulgacao').hide();
+        $('#noticias-list').show(); // Mostra a lista de notícias
+        $('#divulgacoes-list').hide(); // Esconde a lista de divulgações
+      });
+
+      // Mostrar formulário de divulgação ao clicar no botão
+      $('#btn-adicionar-divulgacao').click(function() {
+        $('#form-divulgacao').show();
+        $('#form-noticia').hide();
+        $('#divulgacoes-list').show(); // Mostra a lista de divulgações
+        $('#noticias-list').hide(); // Esconde a lista de notícias
+      });
+
+    $(document).ready(function() {
+      // Carregar notícias ao carregar a página
+      carregarNoticias();
+      // Carregar divulgações ao carregar a página
+      carregarDivulgacoes();
+
+      // Função para carregar notícias
+      function carregarNoticias() {
+        $('#noticias-list').empty();
+        $.get('http://localhost:5000/api/noticias', function(noticias) {
+          noticias.forEach(function(noticia) {
+            $('#noticias-list').append(`
+              <div class="noticia" id="${noticia._id}">
+                <h2>${noticia.titulo}</h2>
+                <p>${noticia.descricao}</p>
+                <img src="${noticia.imagem}" alt="${noticia.titulo}">
+                <p>Data de Publicação: ${noticia.data}</p>
+                <div class="buttons">
+                  <button class="btn btn-editar-noticia" data-id="${noticia._id}">Editar</button>
+                  <button class="btn btn-excluir-noticia" data-id="${noticia._id}">Excluir</button>
+                </div>
+              </div>
+            `);
+          });
+        });
+      }
+
+      // Função para carregar divulgações
+      function carregarDivulgacoes() {
+        $('#divulgacoes-list').empty();
+        $.get('http://localhost:5000/api/divulgacoes', function(divulgacoes) {
+          divulgacoes.forEach(function(divulgacao) {
+            $('#divulgacoes-list').append(`
+              <div class="divulgacao" id="${divulgacao._id}">
+                <h2>${divulgacao.titulo}</h2>
+                <p>${divulgacao.descricao}</p>
+                <img src="${divulgacao.imagem}" alt="${divulgacao.titulo}">
+                <p>Data de Publicação: ${divulgacao.data}</p>
+                <div class="buttons">
+                  <button class="btn btn-editar-divulgacao" data-id="${divulgacao._id}">Editar</button>
+                  <button class="btn btn-excluir-divulgacao" data-id="${divulgacao._id}">Excluir</button>
+                </div>
+              </div>
+            `);
+          });
+        });
+      }
+
+      // Manipulação do formulário de notícias
+      $('#form-noticia').submit(function(event) {
+        event.preventDefault();
+        const noticiaId = $('#noticiaId').val();
+        const titulo = $('#tituloNoticia').val();
+        const descricao = $('#descricaoNoticia').val();
+        const imagem = $('#imagemNoticia').val();
+        const data = $('#dataNoticia').val();
+
+        if (titulo && descricao && imagem && data) {
+          if (noticiaId) {
+            // Requisição PUT para editar notícia existente
+            $.ajax({
+              url: `http://localhost:5000/api/noticias/${noticiaId}`,
+              method: 'PUT',
+              contentType: 'application/json',
+              data: JSON.stringify({ titulo, descricao, imagem, data }),
+              success: function() {
+                carregarNoticias(); // Recarrega as notícias após a edição
+                limparFormularioNoticia(); // Limpa o formulário após a edição
+                $('#form-title-noticia').text('Adicionar Nova Notícia');
+                $('#form-noticia button[type=submit]').text('Adicionar Notícia');
+                $('#noticiaId').val('');
+              },
+              error: function(error) {
+                console.error('Erro ao editar notícia:', error);
+              }
+            });
+          } else {
+            // Requisição POST para adicionar nova notícia
+            $.ajax({
+              url: 'http://localhost:5000/api/noticias',
+              method: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify({ titulo, descricao, imagem, data }),
+              success: function() {
+                carregarNoticias(); // Recarrega as notícias após adicionar
+                limparFormularioNoticia(); // Limpa o formulário após adicionar
+              },
+              error: function(error) {
+                console.error('Erro ao adicionar notícia:', error);
+              }
+            });
+          }
+        } else {
+          alert('Preencha todos os campos da notícia!');
+        }
+      });
+
+      // Manipulação do formulário de divulgações
+      $('#form-divulgacao').submit(function(event) {
+        event.preventDefault();
+        const divulgacaoId = $('#divulgacaoId').val();
+        const titulo = $('#tituloDivulgacao').val();
+        const descricao = $('#descricaoDivulgacao').val();
+        const imagem = $('#imagemDivulgacao').val();
+        const data = $('#dataDivulgacao').val();
+
+        if (titulo && descricao && imagem && data) {
+          if (divulgacaoId) {
+            // Requisição PUT para editar divulgação existente
+            $.ajax({
+              url: `http://localhost:5000/api/divulgacoes/${divulgacaoId}`,
+              method: 'PUT',
+              contentType: 'application/json',
+              data: JSON.stringify({ titulo, descricao, imagem, data }),
+              success: function() {
+                carregarDivulgacoes(); // Recarrega as divulgações após a edição
+                limparFormularioDivulgacao(); // Limpa o formulário após a edição
+                $('#form-title-divulgacao').text('Adicionar Nova Divulgação');
+                $('#form-divulgacao button[type=submit]').text('Adicionar Divulgação');
+                $('#divulgacaoId').val('');
+              },
+              error: function(error) {
+                console.error('Erro ao editar divulgação:', error);
+              }
+            });
+          } else {
+            // Requisição POST para adicionar nova divulgação
+            $.ajax({
+              url: 'http://localhost:5000/api/divulgacoes',
+              method: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify({ titulo, descricao, imagem, data }),
+              success: function() {
+                carregarDivulgacoes(); // Recarrega as divulgações após adicionar
+                limparFormularioDivulgacao(); // Limpa o formulário após adicionar
+              },
+              error: function(error) {
+                console.error('Erro ao adicionar divulgação:', error);
+              }
+            });
+          }
+        } else {
+          alert('Preencha todos os campos da divulgação!');
+        }
+      });
+
+      // Função para limpar formulário de notícia
+      function limparFormularioNoticia() {
+        $('#tituloNoticia').val('');
+        $('#descricaoNoticia').val('');
+        $('#imagemNoticia').val('');
+        $('#dataNoticia').val('');
+      }
+
+      // Função para limpar formulário de divulgação
+      function limparFormularioDivulgacao() {
+        $('#tituloDivulgacao').val('');
+        $('#descricaoDivulgacao').val('');
+        $('#imagemDivulgacao').val('');
+        $('#dataDivulgacao').val('');
+      }
+
+      // Editar notícia
+      $('#noticias-list').on('click', '.btn-editar-noticia', function() {
+        const noticiaId = $(this).attr('data-id');
+        $.get(`http://localhost:5000/api/noticias/${noticiaId}`, function(noticia) {
+          $('#tituloNoticia').val(noticia.titulo);
+          $('#descricaoNoticia').val(noticia.descricao);
+          $('#imagemNoticia').val(noticia.imagem);
+          $('#dataNoticia').val(noticia.data);
+          $('#noticiaId').val(noticia._id);
+          $('#form-title-noticia').text('Editar Notícia');
+          $('#form-noticia button[type=submit]').text('Salvar Alterações');
+        });
+      });
+
+      // Excluir notícia
+      $('#noticias-list').on('click', '.btn-excluir-noticia', function() {
+        const noticiaId = $(this).attr('data-id');
+        $.ajax({
+          url: `http://localhost:5000/api/noticias/${noticiaId}`,
+          method: 'DELETE',
+          success: function() {
+            carregarNoticias(); // Recarrega as notícias após exclusão
+          },
+          error: function(error) {
+            console.error('Erro ao excluir notícia:', error);
+          }
+        });
+      });
+
+      // Editar divulgação
+      $('#divulgacoes-list').on('click', '.btn-editar-divulgacao', function() {
+        const divulgacaoId = $(this).attr('data-id');
+        $.get(`http://localhost:5000/api/divulgacoes/${divulgacaoId}`, function(divulgacao) {
+          $('#tituloDivulgacao').val(divulgacao.titulo);
+          $('#descricaoDivulgacao').val(divulgacao.descricao);
+          $('#imagemDivulgacao').val(divulgacao.imagem);
+          $('#dataDivulgacao').val(divulgacao.data);
+          $('#divulgacaoId').val(divulgacao._id);
+          $('#form-title-divulgacao').text('Editar Divulgação');
+          $('#form-divulgacao button[type=submit]').text('Salvar Alterações');
+        });
+      });
+
+      // Excluir divulgação
+      $('#divulgacoes-list').on('click', '.btn-excluir-divulgacao', function() {
+        const divulgacaoId = $(this).attr('data-id');
+        $.ajax({
+          url: `http://localhost:5000/api/divulgacoes/${divulgacaoId}`,
+          method: 'DELETE',
+          success: function() {
+            carregarDivulgacoes(); // Recarrega as divulgações após exclusão
+          },
+          error: function(error) {
+            console.error('Erro ao excluir divulgação:', error);
+          }
+        });
+      });
+
+      // Botão cancelar notícia
+      $('#btn-cancelar-noticia').click(function() {
+        limparFormularioNoticia();
+        $('#form-title-noticia').text('Adicionar Nova Notícia');
+        $('#form-noticia button[type=submit]').text('Adicionar Notícia');
+        $('#noticiaId').val('');
+      });
+
+      // Botão cancelar divulgação
+      $('#btn-cancelar-divulgacao').click(function() {
+        limparFormularioDivulgacao();
+        $('#form-title-divulgacao').text('Adicionar Nova Divulgação');
+        $('#form-divulgacao button[type=submit]').text('Adicionar Divulgação');
+        $('#divulgacaoId').val('');
+      });
+    }); });
+  </script>
+</body>
+</html>
